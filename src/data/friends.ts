@@ -19,8 +19,8 @@ export const friendsData: FriendItem[] = [
 	{
 		id: 1,
 		title: "黎明の小站",
-		imgurl:
-			"https://img.picr2.online/img/2026/08/11/53e434940500fedf026d87082def639a.webp",
+		// Image source: https://img.picr2.online/img/2026/08/11/53e434940500fedf026d87082def639a.webp
+		imgurl: "/assets/friends/yoake.webp",
 		desc: "この小さな場所に、生きてきた証をそっと積み上げていく。",
 		siteurl: "https://blog.yoake.dev/",
 		tags: [],
@@ -28,7 +28,8 @@ export const friendsData: FriendItem[] = [
 	{
 		id: 2,
 		title: "松坂日记",
-		imgurl: "https://blog.mysqil.com/images/favicon/favicon-192.png",
+		// Image source: https://blog.mysqil.com/images/favicon/favicon-192.png
+		imgurl: "/assets/friends/mysqil.webp",
 		desc: "一个基于内容分享,创作与灵感结合折腾的笔记博客",
 		siteurl: "https://blog.mysqil.com/",
 		tags: [],
@@ -36,7 +37,8 @@ export const friendsData: FriendItem[] = [
 	{
 		id: 3,
 		title: "年华",
-		imgurl: "https://blog.amamo.top/favicon/favicon2.png",
+		// Image source: https://blog.amamo.top/favicon/favicon2.png
+		imgurl: "/assets/friends/amamo.webp",
 		desc: "基于Firefly和Astro开发的个人博客，我会在这里分享生活和技术。",
 		siteurl: "https://blog.amamo.top/",
 		tags: [],
@@ -44,7 +46,8 @@ export const friendsData: FriendItem[] = [
 	{
 		id: 4,
 		title: "梦春酱的温馨小屋",
-		imgurl: "https://new.yumeharu.top/assets/images/favicon-32x32.png",
+		// Image source: https://new.yumeharu.top/assets/images/favicon-32x32.png
+		imgurl: "/assets/friends/yumeharu.webp",
 		desc: "",
 		siteurl: "https://new.yumeharu.top/",
 		tags: [],
@@ -52,7 +55,8 @@ export const friendsData: FriendItem[] = [
 	{
 		id: 5,
 		title: "SuzuhaYuki's Blog",
-		imgurl: "https://blog.yuk1.uk/favicon/favicon.webp",
+		// Image source: https://blog.yuk1.uk/_astro/avatar.D77mm3NB_dKL2U.webp
+		imgurl: "/assets/friends/yuki.webp",
 		desc: "Time goes by, and the years go by.",
 		siteurl: "https://blog.yuk1.uk/",
 		tags: [],
