@@ -369,12 +369,10 @@ const showCover = $derived(Boolean(project.cover) && !coverFailed);
 			flex-shrink: 0
 
 	&__summary
-		display: -webkit-box
+		display: block
 		min-height: 2.8em
 		margin: 0
-		overflow: hidden
-		-webkit-line-clamp: 2
-		-webkit-box-orient: vertical
+		overflow-wrap: anywhere
 		color: var(--on-surface-variant)
 		font: var(--m3e-type-body-small)
 		line-height: 1.5
