@@ -201,7 +201,7 @@ onMount(() => {
 				/>
 			</div>
 		{/if}
-	{:else}
+	{:else if moments.length > 0}
 		<div class="moment-section__empty">
 			<Icon icon="material-symbols:search-off-outline-rounded" aria-hidden="true" />
 			<span>{i18n(I18nKey.momentsNoResults)}</span>
