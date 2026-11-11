@@ -15,7 +15,49 @@ export interface FriendItem {
 }
 
 // 友情链接数据
-export const friendsData: FriendItem[] = [];
+export const friendsData: FriendItem[] = [
+	{
+		id: 1,
+		title: "黎明の小站",
+		imgurl:
+			"https://img.picr2.online/img/2026/08/11/53e434940500fedf026d87082def639a.webp",
+		desc: "この小さな場所に、生きてきた証をそっと積み上げていく。",
+		siteurl: "https://blog.yoake.dev/",
+		tags: [],
+	},
+	{
+		id: 2,
+		title: "松坂日记",
+		imgurl: "https://blog.mysqil.com/images/favicon/favicon-192.png",
+		desc: "一个基于内容分享,创作与灵感结合折腾的笔记博客",
+		siteurl: "https://blog.mysqil.com/",
+		tags: [],
+	},
+	{
+		id: 3,
+		title: "年华",
+		imgurl: "https://blog.amamo.top/favicon/favicon2.png",
+		desc: "基于Firefly和Astro开发的个人博客，我会在这里分享生活和技术。",
+		siteurl: "https://blog.amamo.top/",
+		tags: [],
+	},
+	{
+		id: 4,
+		title: "梦春酱的温馨小屋",
+		imgurl: "https://new.yumeharu.top/assets/images/favicon-32x32.png",
+		desc: "",
+		siteurl: "https://new.yumeharu.top/",
+		tags: [],
+	},
+	{
+		id: 5,
+		title: "SuzuhaYuki's Blog",
+		imgurl: "https://blog.yuk1.uk/favicon/favicon.webp",
+		desc: "Time goes by, and the years go by.",
+		siteurl: "https://blog.yuk1.uk/",
+		tags: [],
+	},
+];
 
 // 获取所有友情链接数据（稳定顺序，测试可复现）
 export function getFriendsList(): FriendItem[] {

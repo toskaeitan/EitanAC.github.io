@@ -611,3 +611,9 @@ has independent section disclosures, expand/collapse controls, automatic reveal
 of the current section and reading progress. Mobile retains its existing panel.
 `EITAN_LOCAL_PREVIEW=1` opts into `/preview/reading/` for local interaction review;
 normal production builds generate no fixture route or demonstration posts.
+
+### Avatar favicon · 2026-11-11
+
+The browser icon now uses the complete existing `eitan-avatar.jpg` artwork,
+matching the sidebar. PNG sizes 16/32/48/180/192 and a 16/32/48 ICO replace the
+E letterform in site metadata. The source artwork and brand palette are unchanged.
