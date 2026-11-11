@@ -1,9 +1,12 @@
+@reference "tailwindcss";
+
 /* Page transition animations with Swup */
 html.is-changing .transition-swup-fade {
-    @apply transition-all duration-150
+    transition: opacity 200ms cubic-bezier(0.2, 0, 0, 1), transform 200ms cubic-bezier(0.2, 0, 0, 1);
 }
 html.is-animating .transition-swup-fade {
-    @apply opacity-0 translate-y-4
+    opacity: 0;
+    transform: translateY(1rem);
 }
 
 /* Fade-in animations for components */
@@ -18,35 +21,43 @@ html.is-animating .transition-swup-fade {
     }
 }
 
-/* Main components - 统一动画时长为150ms，与主题切换保持一致 */
+/* Main components */
 .onload-animation {
     opacity: 0;
-    animation: 150ms fade-in-up;
+    animation: 300ms fade-in-up;
     animation-fill-mode: forwards;
 }
 #navbar {
-    animation-delay: 20ms
+    animation-delay: 0ms
 }
 #sidebar {
-    animation-delay: 40ms
+    animation-delay: 100ms
+}
+#sidebar-secondary {
+    animation-delay: 100ms
 }
 #swup-container {
     outline: none;
 }
 #content-wrapper {
-    animation-delay: 60ms;
+    animation-delay: var(--content-delay);
 }
 .footer {
-    animation-delay: 80ms;
-}
-#banner-credit {
-    animation-delay: 100ms;
+    animation-delay: 250ms;
 }
 
-/* Post content - 优化动画层次，提升视觉体验 */
-#post-container :nth-child(1) { animation-delay: 0ms }
-#post-container :nth-child(2) { animation-delay: 20ms }
-#post-container :nth-child(3) { animation-delay: 40ms }
-#post-container :nth-child(4) { animation-delay: 60ms }
-#post-container :nth-child(5) { animation-delay: 80ms }
-#post-container :nth-child(6) { animation-delay: 100ms }
+/* Post content
+ *
+ * The staggered entry delays this used to set are gone. They were scoped to
+ * `#post-container`, which no longer exists in `src/`, so the rules matched
+ * nothing and article sections animated with the base delay instead.
+ *
+ * Re-anchoring them is not a drop-in fix. `:nth-child()` only reaches direct
+ * children, and of the 11 `.onload-animation` elements inside
+ * `#content-wrapper` only 2 are direct children — the rest sit deeper, so a
+ * re-anchored selector would apply to a different, much smaller set than the
+ * one originally intended, and `#content-wrapper` already sets its own
+ * `animation-delay`, making the first step ambiguous.
+ *
+ * Restoring the stagger means picking the intended element list explicitly
+ * rather than by nth-child. */

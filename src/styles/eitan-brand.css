@@ -1,0 +1,66 @@
+/* Brand-owned atmosphere derived from ETF-Lookthrough. Existing contour texture is unchanged. */
+:root {
+    --eitan-ambient-green: oklch(0.50 0.075 168 / 0.08);
+    --eitan-ambient-teal: oklch(0.42 0.06 182 / 0.06);
+    --eitan-focus-glow: color-mix(in oklch, var(--primary) 7%, transparent);
+}
+
+html.dark body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -21;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse at 12% 12%, var(--eitan-ambient-green), transparent 46%),
+        radial-gradient(ellipse at 90% 70%, var(--eitan-ambient-teal), transparent 48%);
+}
+
+/* Hover uses the existing card elevation; light is restrained to the active reading target. */
+.m3-blog-postcard:hover,
+.m3-blog-postcard:focus-within {
+    box-shadow: 0 8px 32px var(--eitan-focus-glow);
+}
+
+/* Compact corners and quiet boundaries keep the reading surface precise. */
+html:root {
+    --shape-corner-l: 12px;
+    --shape-corner-m: 8px;
+}
+html:root .m3-blog-postcard {
+    border: 1px solid color-mix(in oklch, var(--outline-variant) 60%, transparent);
+}
+
+/* Keep short navigation labels intact when the projects entry is present. */
+html:root .top-app-bar__nav-group {
+    flex-shrink: 0;
+}
+html:root .top-app-bar__nav-link {
+    white-space: nowrap;
+}
+
+/* One bilingual serif family throughout the site, following the LaTeX reference. */
+html:root {
+    --m3e-font-sans: var(--font-body), "Songti SC", "SimSun", serif;
+    --eitan-font-reading: var(--m3e-font-sans);
+}
+html:root .custom-md,
+html:root .custom-md :is(h1, h2, h3, h4, h5, h6),
+html:root .m3-blog-postcard__title,
+html:root .m3-blog-postcard__desc,
+html:root .page-header__title,
+html:root [data-pagefind-meta="title"],
+html:root article h1 {
+    font-family: var(--eitan-font-reading);
+}
+html:root .m3-blog-postcard__title {
+    font-weight: 600;
+    letter-spacing: 0.015em;
+}
+html:root .m3-blog-postcard__desc {
+    line-height: 1.9;
+}
+html:root .custom-md {
+    font-size: 1.125rem;
+    line-height: 1.95;
+}

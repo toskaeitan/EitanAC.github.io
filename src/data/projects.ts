@@ -1,62 +1,24 @@
-// 项目数据配置文件
-// 用于管理项目展示页面的数据
+/**
+ * 项目页数据源（纯内容）。
+ * 页面展示与筛选规则由 src/config/projectsConfig.ts 控制。
+ */
+import type { ProjectItem } from "@/types/projectsConfig";
 
-export interface Project {
-	id: string;
-	title: string;
-	description: string;
-	image: string;
-	category: "web" | "mobile" | "desktop" | "other";
-	techStack: string[];
-	status: "completed" | "in-progress" | "planned";
-	liveDemo?: string;
-	sourceCode?: string;
-	startDate: string;
-	endDate?: string;
-	featured?: boolean;
-	tags?: string[];
+export const projectsData: ProjectItem[] = [
+	{
+		key: "etf-lookthrough",
+		title: "ETF Lookthrough",
+		summary: "面向 Schwab 账户的只读投资组合分析工具。穿透 ETF 底层持仓、归并重复公司敞口，结合集中度、组合表现与 ETF 持仓变动，帮助复核实际暴露。",
+		category: "finance",
+		phase: "shipped",
+		technologies: ["Python", "JavaScript", "SQLite"],
+		icon: "material-symbols:deployed-code-outline-rounded",
+		featured: true,
+		website: "https://etflookthrough.com/",
+	},
+];
+
+/** 获取所有项目数据列表 */
+export function getProjectsList(): ProjectItem[] {
+	return projectsData;
 }
-
-// 暂不展示内容；以后可在此添加新条目。
-export const projectsData: Project[] = [];
-
-// 获取项目统计信息
-export const getProjectStats = () => {
-	const total = projectsData.length;
-	const completed = projectsData.filter((p) => p.status === "completed").length;
-	const inProgress = projectsData.filter(
-		(p) => p.status === "in-progress",
-	).length;
-	const planned = projectsData.filter((p) => p.status === "planned").length;
-
-	return {
-		total,
-		byStatus: {
-			completed,
-			inProgress,
-			planned,
-		},
-	};
-};
-
-// 按分类获取项目
-export const getProjectsByCategory = (category?: string) => {
-	if (!category || category === "all") {
-		return projectsData;
-	}
-	return projectsData.filter((p) => p.category === category);
-};
-
-// 获取特色项目
-export const getFeaturedProjects = () => {
-	return projectsData.filter((p) => p.featured);
-};
-
-// 获取所有技术栈
-export const getAllTechStack = () => {
-	const techSet = new Set<string>();
-	projectsData.forEach((project) => {
-		project.techStack.forEach((tech) => techSet.add(tech));
-	});
-	return Array.from(techSet).sort();
-};

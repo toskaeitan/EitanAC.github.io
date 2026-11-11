@@ -1,42 +1,37 @@
 import type Swup from "swup";
+import "@swup/scroll-plugin";
 
 declare global {
-	interface HTMLElementTagNameMap {
-		"table-of-contents": HTMLElement & {
-			init?: () => void;
-		};
+	interface OddmiscStatsResult {
+		pageviews: number;
+		visitors: number;
+		visits: number;
+		_fromCache?: boolean;
+	}
+
+	interface OddmiscBrowserClient {
+		getSiteStats: () => Promise<OddmiscStatsResult>;
+		getPageStats: (path: string) => Promise<OddmiscStatsResult>;
+		clearCache: () => void;
 	}
 
 	interface Window {
-		// Injected by the Swup integration.
-		swup: Swup;
-		pagefind: {
+		swup?: Swup;
+		oddmisc?: OddmiscBrowserClient;
+		__shironeUmamiStatsPromises?: Record<string, Promise<OddmiscStatsResult>>;
+		__shironeNavigationBound?: boolean;
+		__shironeSidebarBound?: boolean;
+		pagefind?: {
 			search: (query: string) => Promise<{
 				results: Array<{
 					data: () => Promise<SearchResult>;
 				}>;
 			}>;
 		};
-		mobileTOCInit?: () => void;
-		semifullScrollHandler?: (() => void) | null;
-		initSemifullScrollDetection?: () => void;
-		closeAnnouncement?: () => void;
-		iconifyLoaded?: boolean;
-		__iconifyLoader?: {
-			load: () => Promise<void>;
-			isLoaded: boolean;
-			addToPreloadQueue: (icons: string[]) => void;
-			onLoad: (callback: () => void) => void;
-		};
-		galleryManager: {
-			isInitialized: boolean;
-			init: () => void;
-			cleanup: () => void;
-		};
 	}
 }
 
-export interface SearchResult {
+interface SearchResult {
 	url: string;
 	meta: {
 		title: string;
