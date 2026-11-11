@@ -140,6 +140,7 @@ export const LinkPresets: Record<string, NavBarLink> = {
 const defaultNavBarConfig: NavBarConfig = {
 	links: [
 		LinkPresets.Home,
+		LinkPresets.Moments,
 		LinkPresets.Projects,
 		LinkPresets.Series,
 		LinkPresets.Archive,
