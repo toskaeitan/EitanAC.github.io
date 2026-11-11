@@ -106,6 +106,9 @@ if (title) {
 
 const favicons: Favicon[] =
 	siteConfig.favicon.length > 0 ? siteConfig.favicon : defaultFavicons;
+const appleTouchIcon = favicons.find((favicon) =>
+	favicon.sizes?.split(/\s+/).includes("180x180"),
+);
 
 if (!lang) {
 	lang = `${siteConfig.lang}`;
@@ -165,6 +168,8 @@ const defaultSchemeStyle = createDefaultSchemeStyle();
 				media={favicon.theme && `(prefers-color-scheme: ${favicon.theme})`}
 			/>
 		))}
+
+        {appleTouchIcon && <link rel="apple-touch-icon" sizes="180x180" href={appleTouchIcon.src.startsWith('/') ? url(appleTouchIcon.src) : appleTouchIcon.src} />}
 
 		<script is:inline define:vars={{DEFAULT_THEME, LIGHT_MODE, DARK_MODE, AUTO_MODE, BANNER_HEIGHT_EXTEND, configHue, lightTheme, darkTheme, defaultWallpaperMode, defaultTexturePreset, defaultTextureOpacity, textureEnabled, fixedPalette}}>
 			const theme = DEFAULT_THEME;
