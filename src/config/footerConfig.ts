@@ -8,4 +8,15 @@ import { withUserConfig } from "../utils/config-overlay.ts";
  */
 export const footerConfig: FooterConfig = withUserConfig("footer", {
 	enable: false,
+	pageViews: { enable: true, hostname: "eitan.chronoresearch.org" },
 });
+
+/** Invalid/disabled settings cannot render a counter or load remote scripts. */
+export function resolveFooterPageViews(
+	config: FooterConfig = footerConfig,
+): { hostname: string } | null {
+	const options = config.pageViews;
+	return options?.enable && options.hostname === "eitan.chronoresearch.org"
+		? { hostname: options.hostname }
+		: null;
+}

@@ -8,4 +8,6 @@ export interface FooterConfig {
 	 * 关闭时（false）满足零额外负担，不进行文件读取与额外 DOM 渲染。
 	 */
 	enable: boolean;
+	/** 可选不蒜子站点总访问量；关闭时不输出统计项或加载脚本。 */
+	pageViews?: { enable: boolean; hostname: string };
 }

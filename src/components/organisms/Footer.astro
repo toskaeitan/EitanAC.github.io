@@ -3,12 +3,48 @@
  * 页脚（消费 blog/FooterBar 原子）。
  * 只负责配置数据：版权名称/年份、FooterConfig.html 文件注入。
  */
+import { getCollection } from "astro:content";
+import Icon from "@components/atoms/display/Icon.svelte";
+import I18nKey from "@i18n/i18nKey";
+import { i18n } from "@i18n/translation";
+import { getSiteStats } from "@utils/site-stats";
+import { getSourceCommitDate, resolveFooterDates } from "@utils/footer-stats";
+import { siteInfo } from "@/data/site-info";
 import * as fs from "node:fs";
 import * as path from "node:path";
 import FooterBar from "@components/atoms/blog/FooterBar.astro";
 import { footerConfig, profileConfig } from "@/config";
+import { resolveFooterPageViews } from "@/config/footerConfig";
 
+const pageViews = resolveFooterPageViews();
+const FooterPageViews = pageViews
+	? (await import("@components/organisms/FooterPageViews.astro")).default
+	: null;
 const currentYear = new Date().getFullYear();
+const [stats, posts, moments] = await Promise.all([
+	getSiteStats(),
+	getCollection("posts", ({ data }) => !data.draft),
+	getCollection("moments", ({ data }) => !data.draft),
+]);
+const dates = resolveFooterDates(
+	siteInfo.launchedAt,
+	getSourceCommitDate(siteInfo.launchedAt),
+	[
+		...posts.flatMap(({ data }) => [
+			data.publishedAt,
+			data.published,
+			data.updatedAt,
+			data.updated,
+		]),
+		...moments.map(({ data }) => data.published),
+	],
+);
+const updatedDate = new Intl.DateTimeFormat("en-CA", {
+	timeZone: "Asia/Shanghai",
+	year: "numeric",
+	month: "2-digit",
+	day: "2-digit",
+}).format(new Date(dates.updatedAt));
 
 let customFooterHtml = "";
 if (footerConfig.enable) {
@@ -36,4 +72,21 @@ if (footerConfig.enable) {
 	name={profileConfig.name}
 	year={currentYear}
 	customHtml={customFooterHtml}
-/>
+>
+ <dl slot="stats" class="footer-stats">
+  <div><dt><Icon icon="material-symbols:edit-note-outline-rounded" />{i18n(I18nKey.statsWords)}</dt><dd>{stats.words.toLocaleString("en-US")}</dd></div>
+  <div><dt><Icon icon="material-symbols:calendar-month-outline-rounded" />{i18n(I18nKey.statsDays)}</dt><dd><site-running-days data-launched-at={siteInfo.launchedAt}>{dates.days}</site-running-days></dd></div>
+  <div><dt><Icon icon="material-symbols:update-rounded" />{i18n(I18nKey.statsUpdated)}</dt><dd><time datetime={dates.updatedAt}>{updatedDate}</time></dd></div>
+  {FooterPageViews && pageViews && <FooterPageViews hostname={pageViews.hostname} />}
+ </dl>
+</FooterBar>
+
+<style>
+.footer-stats { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--m3e-space-2) var(--m3e-space-6); margin: var(--m3e-space-2) 0 0; color: var(--on-surface-variant); font: var(--m3e-type-body-small); }
+.footer-stats :global(div), .footer-stats :global(dt) { display: inline-flex; align-items: center; gap: var(--m3e-space-2); }
+.footer-stats :global(dd) { margin: 0; font-variant-numeric: tabular-nums; color: var(--on-surface); }
+</style>
+<script>
+import { defineRunningDays } from "@utils/footer-running-days";
+defineRunningDays();
+</script>

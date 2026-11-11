@@ -1,0 +1,15 @@
+---
+import Icon from "@components/atoms/display/Icon.svelte";
+import I18nKey from "@i18n/i18nKey";
+import { i18n } from "@i18n/translation";
+import runtimeSource from "@utils/footer-pageviews-runtime.mjs?raw";
+interface Props {
+	hostname: string;
+}
+const { hostname } = Astro.props;
+---
+<div>
+ <dt><Icon icon="material-symbols:visibility-outline-rounded" />{i18n(I18nKey.profileStatsPageViews)}</dt>
+ <dd><footer-page-views data-hostname={hostname} data-production={import.meta.env.PROD ? "true" : "false"}><span id="busuanzi_value_site_pv">—</span></footer-page-views></dd>
+</div>
+<script is:inline type="module" set:html={`${runtimeSource}\nstartFooterPageviews();`} />
