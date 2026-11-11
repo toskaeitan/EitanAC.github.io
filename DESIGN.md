@@ -617,3 +617,30 @@ normal production builds generate no fixture route or demonstration posts.
 The browser icon now uses the complete existing `eitan-avatar.jpg` artwork,
 matching the sidebar. PNG sizes 16/32/48/180/192 and a 16/32/48 ICO replace the
 E letterform in site metadata. The source artwork and brand palette are unchanged.
+
+### Article reading defaults · 2026-11-12
+
+Owner-confirmed defaults for this blog's current and future articles live in
+`src/styles/eitan-brand.css`; they override the theme's general prose scale only
+inside `.post-card`:
+
+- Keep the existing Source Han Serif CN VF family and regular weight 400.
+- Body size: `1rem` (16px at the default browser size); line height: `1.8`
+  (28.8px); letter spacing: `0.01em`.
+- Reading measure: at most `46rem` (736px), with responsive side padding shared
+  by the article header and body. Preserve browser zoom and narrower viewports.
+- Long-form text and formulas share the reading ink token: an OKLab mix of
+  `--on-surface` at 84% with `--card-bg`. Keep the existing green theme and texture.
+- KaTeX uses a `1em` base, matching the body rather than its default `1.21em`.
+  Preserve KaTeX's mathematical fonts, fraction/script proportions, display
+  operators and horizontal overflow handling; do not resize their internals.
+- Write mathematics as LaTeX in standalone `$$` blocks, with delimiters on their
+  own lines. Keep simple variables in ordinary prose and avoid single-dollar
+  inline formulas or math source in tables.
+
+The homepage order is introduction, recent articles, then tools. Article tags
+should remain broad rather than listing each formula; the first article uses
+only `概率论`, under the `数学` category.
+
+Edits are previewed with the local Astro development server. Publishing requires
+the owner's instruction for the edited version; pushing `main` triggers Pages.

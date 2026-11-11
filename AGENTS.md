@@ -6,6 +6,8 @@ Shirone is a blog theme built with Astro 7, Svelte 5, Tailwind 4, Stylus, and pn
 
 ## Must-follow rules
 
+- For Eitan article typography and math, follow `DESIGN.md` → “Article reading defaults · 2026-11-12”: 16px body, 1.8 line height, 736px maximum reading measure, existing serif face, and KaTeX at a matching 1em base. Use this shared rule for future articles rather than per-post overrides. Preview edits locally; publish the edited version only when the owner instructs publication.
+
 - Optional features and third-party integrations (comments, analytics, widgets, etc.) must follow the **zero extra burden** rule: when disabled (`enable: false` or omitted), they must produce zero external network requests, zero DOM footprint/layout shift, zero npm bundle bloat (dynamic loading only), and full backward compatibility without requiring mass edits to existing content frontmatter.
 - Read the relevant files in `rules/` and `docs/` before changing architecture, components, routing, or content pipelines. Run `npx.cmd astro check` before committing; it must report 0 errors. Use conventional commits in the form `type(scope): subject` (`feat`, `fix`, `test`, `docs`, `refactor`, `chore`, or another justified type).
 - For UI and visual changes, read the root `DESIGN.md` alongside `docs/m3e-standard.md`; `DESIGN.md` is the machine-readable and narrative source of truth for Shirone's visual identity.

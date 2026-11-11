@@ -7,18 +7,20 @@ import type { ProjectItem } from "@/types/projectsConfig";
 interface Props {
 	project?: ProjectItem;
 	showMoments?: boolean;
+	showIntro?: boolean;
 }
-const { project, showMoments = false } = Astro.props;
+const { project, showMoments = false, showIntro = true } = Astro.props;
 ---
-<section class="home-overview" aria-labelledby="home-title">
- <div class="home-intro">
+<section class="home-overview" aria-labelledby={showIntro ? "home-title" : undefined}>
+ {showIntro && <div class="home-intro">
   <h1 id="home-title">{i18n(Key.homeIntroTitle)}</h1>
   <p>{i18n(Key.homeIntroDescription)}</p>
   <nav class="home-paths" aria-label={i18n(Key.home)}>
    <a href={url('/archive/')} class="m3-state-layer">{i18n(Key.homeRead)}<Icon icon="material-symbols:arrow-forward-rounded" /></a>
    {showMoments && <a href={url('/moments/')} class="m3-state-layer">{i18n(Key.homeNotes)}<Icon icon="material-symbols:arrow-forward-rounded" /></a>}
   </nav>
- </div>
+ </div>}
+ <slot />
  {project && <section class="home-project" aria-labelledby="home-project-heading">
   <div class="home-section-heading"><h2 id="home-project-heading">{i18n(Key.homeFeaturedProject)}</h2><a href={url('/projects/')}>{i18n(Key.homeBuild)}<Icon icon="material-symbols:arrow-forward-rounded" /></a></div>
   <div class="home-project-body">

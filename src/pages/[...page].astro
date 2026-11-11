@@ -27,11 +27,16 @@ const project = projectsConfig.enable
 ---
 
 <MainGridLayout page="home">
-    {page.currentPage === 1 && <HomeOverview project={project} showMoments={momentsConfig.enable} />}
+    <HomeOverview
+        project={page.currentPage === 1 ? project : undefined}
+        showIntro={page.currentPage === 1}
+        showMoments={momentsConfig.enable}
+    >
     {len > 0 && <section aria-label={i18n(Key.homeLatestPosts)}>
         <h2 class="home-posts-title">{i18n(Key.homeLatestPosts)}</h2>
         <PostPage page={page} />
     </section>}
     {page.lastPage > 1 && <Pagination class="mx-auto onload-animation" page={page} />}
+    </HomeOverview>
 </MainGridLayout>
 <style>.home-posts-title { margin: var(--m3e-space-8) 0 var(--m3e-space-4); font-size: 1.25rem; font-weight: 600; }</style>

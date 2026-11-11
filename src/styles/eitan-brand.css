@@ -64,3 +64,26 @@ html:root .custom-md {
     font-size: 1.125rem;
     line-height: 1.95;
 }
+
+/* Article reading roles: a bounded measure, aligned with its header.
+   Keep the brand surface and serif family; soften only long-form text. */
+html:root .post-card {
+    --eitan-reading-measure: 46rem;
+    --eitan-reading-ink: color-mix(in oklab, var(--on-surface) 84%, var(--card-bg));
+    padding-inline: max(var(--m3e-space-6), calc((100% - var(--eitan-reading-measure)) / 2));
+}
+html:root .post-card .custom-md {
+    --tw-prose-body: var(--eitan-reading-ink);
+    --tw-prose-invert-body: var(--eitan-reading-ink);
+    color: var(--eitan-reading-ink);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.8;
+    letter-spacing: 0.01em;
+}
+/* KaTeX retains its own mathematical faces and spacing. */
+html:root .post-card .custom-md .katex {
+    color: var(--eitan-reading-ink);
+    font-size: 1em;
+    letter-spacing: normal;
+}
