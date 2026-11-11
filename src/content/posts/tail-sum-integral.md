@@ -3,7 +3,7 @@ title: 尾和与尾积分
 published: 2026-11-11
 description: 用示性函数推导离散尾和与尾积分公式，以及一阶矩和 n 阶原点矩的特例。
 category: 数学
-tags: [概率论, 期望, 尾和公式, 尾积分公式]
+tags: [概率论]
 draft: false
 lang: zh_CN
 ---
