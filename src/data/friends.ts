@@ -19,9 +19,9 @@ export const friendsData: FriendItem[] = [
 	{
 		id: 1,
 		title: "黎明の小站",
-		// Image source: https://img.picr2.online/img/2026/08/11/53e434940500fedf026d87082def639a.webp
-		imgurl: "/assets/friends/yoake.webp",
-		desc: "この小さな場所に、生きてきた証をそっと積み上げていく。",
+		// Avatar and description supplied by the site owner.
+		imgurl: "https://q.qlogo.cn/headimg_dl?dst_uin=3255235912&spec=640&img_type=jpg",
+		desc: "关注黎明喵~关注黎明谢谢喵~",
 		siteurl: "https://blog.yoake.dev/",
 		tags: [],
 	},
