@@ -115,12 +115,12 @@ export const siteConfig: SiteConfig = withUserConfig("site", {
 	},
 	favicon: [
 		// 浏览器标签页图标，路径相对于 public 目录。
-		{ src: "/favicon.ico?v=5", sizes: "16x16 32x32 48x48" },
-		{ src: "/favicon/eitan-avatar-v5-16.png", sizes: "16x16" },
-		{ src: "/favicon/eitan-avatar-v5-32.png", sizes: "32x32" },
-		{ src: "/favicon/eitan-avatar-v5-48.png", sizes: "48x48" },
-		{ src: "/favicon/eitan-avatar-v5-180.png", sizes: "180x180" },
-		{ src: "/favicon/eitan-avatar-v5-192.png", sizes: "192x192" },
+		{ src: "/favicon/eitan-avatar-v6.ico", sizes: "16x16 32x32 48x48" },
+		{ src: "/favicon/eitan-avatar-v6-16.png", sizes: "16x16" },
+		{ src: "/favicon/eitan-avatar-v6-32.png", sizes: "32x32" },
+		{ src: "/favicon/eitan-avatar-v6-48.png", sizes: "48x48" },
+		{ src: "/favicon/eitan-avatar-v6-180.png", sizes: "180x180" },
+		{ src: "/favicon/eitan-avatar-v6-192.png", sizes: "192x192" },
 	],
 });
 
