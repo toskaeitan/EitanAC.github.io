@@ -1,7 +1,4 @@
-const SDK_URL =
-	"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js";
-const COUNTER_URL =
-	"https://busuanzi.ibruce.info/busuanzi?jsonpCallback=BusuanziCallback";
+const COUNTER_URL = "https://busuanzi.ibruce.info/busuanzi";
 
 export function canTrackPageviews(
 	enabled,
@@ -55,84 +52,50 @@ export function startFooterPageviews() {
 	const value = root.querySelector("#busuanzi_value_site_pv");
 	if (!value) return;
 	const claimRoute = createPageviewGate();
-	let sdkReady = false;
 	let sequence = Promise.resolve();
-	let generation = 0;
 
-	async function track() {
-		const current = ++generation;
+	function track() {
 		value.textContent = "—";
-		await new Promise((resolve) => {
-			let observer;
-			let sdk;
-			let jsonp;
-			let timer;
+		root.dataset.state = "loading";
+		return new Promise((resolve) => {
+			const callbackName = `EitanBusuanzi_${Math.random().toString(36).slice(2)}`;
+			const script = document.createElement("script");
 			let settled = false;
-			const finish = (success) => {
+			const finish = (state) => {
 				if (settled) return;
 				settled = true;
 				clearTimeout(timer);
-				observer?.disconnect();
-				if (!success && current === generation) value.textContent = "—";
-				if (!success) {
-					sdk?.remove();
-					jsonp?.remove();
-				}
+				script.onerror = null;
+				script.remove();
+				delete window[callbackName];
+				root.dataset.state = state;
+				if (state !== "ready") value.textContent = "—";
 				resolve();
 			};
-			const apply = (data) => {
-				if (settled || current !== generation) return;
-				value.textContent = pageviewText(data?.site_pv);
-				finish(value.textContent !== "—");
+			const timer = setTimeout(() => finish("timeout"), 24_000);
+			window[callbackName] = (data) => {
+				if (settled) return;
+				const text = pageviewText(data?.site_pv);
+				if (text === "—") {
+					finish("error");
+					return;
+				}
+				value.textContent = text;
+				finish("ready");
 			};
-			timer = setTimeout(() => finish(false), 8000);
-			if (!sdkReady) {
-				// Official SDK performs exactly one initial request itself.
-				observer = new MutationObserver(() => {
-					const count = Number(value.textContent);
-					if (
-						/^\d+$/.test(value.textContent ?? "") &&
-						Number.isSafeInteger(count)
-					)
-						finish(true);
-				});
-				observer.observe(value, {
-					childList: true,
-					subtree: true,
-					characterData: true,
-				});
-				sdk = document.createElement("script");
-				sdk.src = SDK_URL;
-				sdk.async = true;
-				sdk.onerror = () => finish(false);
-				sdk.onload = () => {
-					sdkReady = Boolean(window.bszCaller && window.bszTag);
-					if (!sdkReady) {
-						finish(false);
-						return;
-					}
-					// Validate the official initial response, discarding a timed-out callback.
-					window.bszTag.texts = apply;
-					jsonp = [...document.scripts].find((script) =>
-						script.src.startsWith("https://busuanzi.ibruce.info/busuanzi?"),
-					);
-					if (jsonp) jsonp.onerror = () => finish(false);
-				};
-				document.head.appendChild(sdk);
-			} else {
-				// Reuse the official transport without reloading or double-counting its SDK.
-				window.bszCaller.fetch(COUNTER_URL, apply);
-				jsonp = [...document.scripts].findLast((script) =>
-					script.src.startsWith("https://busuanzi.ibruce.info/busuanzi?"),
-				);
-				if (jsonp) jsonp.onerror = () => finish(false);
-			}
+			script.src = `${COUNTER_URL}?jsonpCallback=${callbackName}`;
+			script.async = true;
+			script.referrerPolicy = "no-referrer-when-downgrade";
+			script.onerror = () => finish("error");
+			document.head.appendChild(script);
 		});
 	}
+
 	const pageView = () => {
 		if (!claimRoute(location.href)) return;
 		sequence = sequence.then(track).catch(() => {
 			value.textContent = "—";
+			root.dataset.state = "error";
 		});
 	};
 	let bound = false;
