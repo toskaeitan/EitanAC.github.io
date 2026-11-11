@@ -1,20 +1,14 @@
 ---
 /**
  * 页脚（消费 blog/FooterBar 原子）。
- * 只负责配置数据：版权名称/年份、RSS/Atom/Sitemap 链接、FooterConfig.html 文件注入。
+ * 只负责配置数据：版权名称/年份、FooterConfig.html 文件注入。
  */
 import * as fs from "node:fs";
 import * as path from "node:path";
 import FooterBar from "@components/atoms/blog/FooterBar.astro";
-import { url } from "@utils/url-utils";
 import { footerConfig, profileConfig } from "@/config";
 
 const currentYear = new Date().getFullYear();
-const links = [
-	{ label: "RSS", href: url("rss/") },
-	{ label: "Atom", href: url("atom/") },
-	{ label: "Sitemap", href: url("sitemap-index.xml"), external: true },
-];
 
 let customFooterHtml = "";
 if (footerConfig.enable) {
@@ -41,6 +35,5 @@ if (footerConfig.enable) {
 <FooterBar
 	name={profileConfig.name}
 	year={currentYear}
-	links={links}
 	customHtml={customFooterHtml}
 />

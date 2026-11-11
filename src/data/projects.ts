@@ -9,7 +9,7 @@ export const projectsData: ProjectItem[] = [
 		key: "etf-lookthrough",
 		title: "ETF Lookthrough",
 		summary:
-			"支持 Schwab 账户的只读组合分析。穿透 ETF 持仓并按公司归并，查看公司、行业和地区的底层敞口；提供期权风险分析、持仓热力图、组合表现和成交复盘。",
+			"连接 Schwab，查看组合持仓。穿透 ETF 并合并重复公司持仓，分析公司、行业和地区敞口；查看期权风险、持仓热力图、组合表现和成交记录。",
 		category: "finance",
 		phase: "shipped",
 		technologies: ["Python", "JavaScript", "SQLite"],
