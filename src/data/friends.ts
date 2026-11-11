@@ -48,7 +48,7 @@ export const friendsData: FriendItem[] = [
 		title: "梦春酱的温馨小屋",
 		// Image source: https://new.yumeharu.top/assets/images/favicon-32x32.png
 		imgurl: "/assets/friends/yumeharu.webp",
-		desc: "",
+		desc: "Not for the best, just for the better.",
 		siteurl: "https://new.yumeharu.top/",
 		tags: [],
 	},
