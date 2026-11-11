@@ -162,7 +162,7 @@ onMount(() => {
 				{/each}
 			</div>
 		{/key}
-	{:else}
+	{:else if friends.length > 0}
 		<div class="friend-section__empty">
 			<Icon icon="material-symbols:search-off-outline-rounded" aria-hidden="true" />
 			<span>{i18n(I18nKey.friendsNoResults)}</span>

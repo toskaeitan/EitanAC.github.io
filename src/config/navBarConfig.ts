@@ -147,7 +147,7 @@ const defaultNavBarConfig: NavBarConfig = {
 		{
 			name: i18n(I18nKey.more),
 			icon: "material-symbols:apps-rounded",
-			children: [LinkPresets.Categories, LinkPresets.Tags, LinkPresets.About],
+			children: [LinkPresets.Categories, LinkPresets.Tags, LinkPresets.Friends, LinkPresets.About],
 		},
 		LinkPresets.GitHub,
 	],
