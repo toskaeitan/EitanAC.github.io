@@ -26,6 +26,8 @@ export interface ProjectItem {
 	technologies: string[];
 	/** 无封面时使用的 Iconify 图标。 */
 	icon?: string;
+	/** 可选项目标志；加载失败时回退到 icon。 */
+	logo?: string;
 	/** 可选项目封面，建议使用本地 WebP/AVIF。 */
 	cover?: string;
 	/** 封面承载额外信息时提供；纯装饰封面留空。 */

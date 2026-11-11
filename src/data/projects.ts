@@ -14,6 +14,7 @@ export const projectsData: ProjectItem[] = [
 		phase: "shipped",
 		technologies: ["Python", "JavaScript", "SQLite"],
 		icon: "material-symbols:deployed-code-outline-rounded",
+		logo: "/assets/projects/etf-lookthrough.svg",
 		featured: true,
 		website: "https://etflookthrough.com/",
 	},

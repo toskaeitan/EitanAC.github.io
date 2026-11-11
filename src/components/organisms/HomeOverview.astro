@@ -22,7 +22,12 @@ const { project, showMoments = false } = Astro.props;
  {project && <section class="home-project" aria-labelledby="home-project-heading">
   <div class="home-section-heading"><h2 id="home-project-heading">{i18n(Key.homeFeaturedProject)}</h2><a href={url('/projects/')}>{i18n(Key.homeBuild)}<Icon icon="material-symbols:arrow-forward-rounded" /></a></div>
   <div class="home-project-body">
-   <div class="home-project-mark" aria-hidden="true"><Icon icon={project.icon || 'material-symbols:deployed-code-outline-rounded'} /></div>
+   <div class="home-project-mark" aria-hidden="true">
+    {project.logo ? <>
+     <img src={project.logo} alt="" width="48" height="48" onerror="this.nextElementSibling.hidden=false;this.remove()" />
+     <span hidden><Icon icon={project.icon || 'material-symbols:deployed-code-outline-rounded'} /></span>
+    </> : <Icon icon={project.icon || 'material-symbols:deployed-code-outline-rounded'} />}
+   </div>
    <div><h3>{project.title}</h3><p>{project.summary}</p></div>
   </div>
   <div class="home-project-footer"><ul>{project.technologies?.map(tech => <li>{tech}</li>)}</ul>{project.website && <a href={project.website} target="_blank" rel="noopener noreferrer" class="home-visit m3-state-layer">{i18n(Key.projectVisit)}<Icon icon="material-symbols:arrow-outward-rounded" /></a>}</div>
@@ -43,6 +48,7 @@ h2 { margin: 0; font-size: 1.25rem; font-weight: 600; }
 .home-section-heading a { font-size: .875rem; }
 .home-project-body { display: grid; grid-template-columns: 3rem minmax(0,1fr); gap: var(--m3e-space-4); padding-block: var(--m3e-space-6); }
 .home-project-mark { font-size: 2rem; color: var(--primary); padding-top: .25rem; }
+.home-project-mark img { display: block; width: 3rem; height: 3rem; object-fit: contain; }
 h3 { margin: 0 0 var(--m3e-space-3); font-size: 1.6rem; font-weight: 600; line-height: 1.5; }
 .home-project-body p { margin: 0; max-width: 42em; font-size: 1rem; line-height: 1.95; color: var(--on-surface-variant); overflow-wrap: anywhere; }
 .home-project-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--m3e-space-4); padding-left: 4rem; }

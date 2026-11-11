@@ -25,6 +25,7 @@ import type { ProjectItem, ProjectPhase } from "@/types/projectsConfig";
 let { project, delay = 0 }: { project: ProjectItem; delay?: number } = $props();
 
 let coverFailed = $state(false);
+let logoFailed = $state(false);
 
 const phaseMeta: Record<
 	ProjectPhase,
@@ -49,6 +50,7 @@ const phaseMeta: Record<
 
 const phase = $derived(phaseMeta[project.phase]);
 const showCover = $derived(Boolean(project.cover) && !coverFailed);
+const showLogo = $derived(Boolean(project.logo) && !logoFailed);
 </script>
 
 {#snippet coverImage()}
@@ -95,8 +97,12 @@ const showCover = $derived(Boolean(project.cover) && !coverFailed);
 	<div class="project-card__body">
 		<div class="project-card__header">
 			{#if !showCover}
-				<span class="project-card__icon" aria-hidden="true">
-					<Icon icon={project.icon ?? "material-symbols:deployed-code-outline-rounded"} />
+				<span class={`project-card__icon ${showLogo ? "project-card__icon--logo" : ""}`} aria-hidden="true">
+                    {#if showLogo}
+                        <img src={project.logo} alt="" width="46" height="46" onerror={() => (logoFailed = true)} />
+                    {:else}
+                        <Icon icon={project.icon ?? "material-symbols:deployed-code-outline-rounded"} />
+                    {/if}
 				</span>
 			{/if}
 
@@ -311,6 +317,16 @@ const showCover = $derived(Boolean(project.cover) && !coverFailed);
 		.project-card:hover &
 			transform: translateY(-0.125rem)
 			box-shadow: var(--m3e-elevation-1)
+
+	&__icon--logo
+		background: transparent
+		border: 0
+		border-radius: 0
+		> img
+			display: block
+			width: 100%
+			height: 100%
+			object-fit: contain
 
 	&__heading
 		display: flex
