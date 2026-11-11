@@ -2,6 +2,21 @@ import Key from "../i18nKey-runtime.mjs";
 import type { Translation } from "../translation.ts";
 
 export const zh_TW: Translation = {
+	[Key.homeIntroTitle]: "一些筆記和小專案",
+	[Key.homeIntroDescription]:
+		"這裡放我的學習記錄和自己做的工具。零碎的想法寫在隨記裡。",
+	[Key.homeRead]: "閱讀文章",
+	[Key.homeBuild]: "看看專案",
+	[Key.homeNotes]: "瀏覽隨記",
+	[Key.homeFeaturedProject]: "自己做的工具",
+	[Key.homeLatestPosts]: "最近的文章",
+	[Key.tocExpandAll]: "全部展開",
+	[Key.tocCollapseAll]: "全部收起",
+	[Key.tocToggleSection]: "展開或收起：{title}",
+	[Key.tocReadingProgress]: "閱讀進度",
+	[Key.readingPreviewTitle]: "閱讀體驗預覽",
+	[Key.readingPreviewNotice]:
+		"僅供本機預覽。這一頁用於體驗目錄與排版，不是正式發表的文章。",
 	[Key.home]: "首頁",
 	[Key.about]: "關於",
 	[Key.archive]: "彙整",
@@ -60,7 +75,7 @@ export const zh_TW: Translation = {
 	[Key.skillLevelExpert]: "精通",
 
 	[Key.projects]: "專案",
-	[Key.projectsBanner]: "持續打磨的作品、實驗與系統。",
+	[Key.projectsBanner]: "自己做的一些工具。",
 	[Key.projectsCounts]: "個專案",
 	[Key.projectCategories]: "專案分類",
 	[Key.projectPhaseShipped]: "已發佈",

@@ -2,6 +2,21 @@ import Key from "../i18nKey-runtime.mjs";
 import type { Translation } from "../translation.ts";
 
 export const zh_CN: Translation = {
+	[Key.homeIntroTitle]: "一些笔记和小项目",
+	[Key.homeIntroDescription]:
+		"这里放我的学习记录和自己做的工具。零碎的想法写在随记里。",
+	[Key.homeRead]: "阅读文章",
+	[Key.homeBuild]: "看看项目",
+	[Key.homeNotes]: "浏览随记",
+	[Key.homeFeaturedProject]: "自己做的工具",
+	[Key.homeLatestPosts]: "最近的文章",
+	[Key.tocExpandAll]: "全部展开",
+	[Key.tocCollapseAll]: "全部收起",
+	[Key.tocToggleSection]: "展开或收起：{title}",
+	[Key.tocReadingProgress]: "阅读进度",
+	[Key.readingPreviewTitle]: "阅读体验预览",
+	[Key.readingPreviewNotice]:
+		"仅供本地预览。这一页用于体验目录与排版，不是正式发布的文章。",
 	[Key.home]: "主页",
 	[Key.about]: "关于",
 	[Key.archive]: "归档",
@@ -20,7 +35,7 @@ export const zh_CN: Translation = {
 
 	[Key.moments]: "随记",
 	[Key.momentsNoResults]: "没有符合条件的随记",
-	[Key.momentsBanner]: "记录研究、项目与日常中的片段。",
+	[Key.momentsBanner]: "学习和日常里的零碎记录。",
 	[Key.momentsCount]: "条随记",
 	[Key.momentsCounts]: "条随记",
 	[Key.pinned]: "置顶",
@@ -60,11 +75,11 @@ export const zh_CN: Translation = {
 	[Key.skillLevelExpert]: "精通",
 
 	[Key.projects]: "项目",
-	[Key.projectsBanner]: "持续打磨的作品、实验与系统。",
+	[Key.projectsBanner]: "自己做的一些工具。",
 	[Key.projectsCounts]: "个项目",
 	[Key.projectCategories]: "项目分类",
 	[Key.projectPhaseShipped]: "已发布",
-	[Key.projectPhaseBuilding]: "构建中",
+	[Key.projectPhaseBuilding]: "开发中",
 	[Key.projectPhaseExploring]: "探索中",
 	[Key.projectVisit]: "访问项目",
 	[Key.projectSource]: "查看源码",

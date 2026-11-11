@@ -2,6 +2,21 @@ import Key from "../i18nKey-runtime.mjs";
 import type { Translation } from "../translation.ts";
 
 export const vi: Translation = {
+	[Key.homeIntroTitle]: "Nghiên cứu, học hỏi và sáng tạo.",
+	[Key.homeIntroDescription]:
+		"Ghi lại câu hỏi, phương pháp và quá trình hiện thực hóa ý tưởng.",
+	[Key.homeRead]: "Đọc bài viết",
+	[Key.homeBuild]: "Xem dự án",
+	[Key.homeNotes]: "Đọc ghi chú",
+	[Key.homeFeaturedProject]: "Dự án tôi xây dựng",
+	[Key.homeLatestPosts]: "Bài viết mới",
+	[Key.tocExpandAll]: "Mở rộng tất cả",
+	[Key.tocCollapseAll]: "Thu gọn tất cả",
+	[Key.tocToggleSection]: "Mở rộng hoặc thu gọn: {title}",
+	[Key.tocReadingProgress]: "Tiến độ đọc",
+	[Key.readingPreviewTitle]: "Xem trước trải nghiệm đọc",
+	[Key.readingPreviewNotice]:
+		"Chỉ xem trước cục bộ. Trang này minh họa mục lục và bố cục, không phải bài viết đã xuất bản.",
 	[Key.home]: "Trang chủ",
 	[Key.about]: "Giới thiệu",
 	[Key.archive]: "Kho bài",

@@ -2,6 +2,21 @@ import Key from "../i18nKey-runtime.mjs";
 import type { Translation } from "../translation.ts";
 
 export const ko: Translation = {
+	[Key.homeIntroTitle]: "연구, 배움, 그리고 직접 만드는 것들.",
+	[Key.homeIntroDescription]:
+		"질문과 방법, 아이디어를 구현하는 과정을 기록합니다.",
+	[Key.homeRead]: "글 읽기",
+	[Key.homeBuild]: "프로젝트 보기",
+	[Key.homeNotes]: "메모 읽기",
+	[Key.homeFeaturedProject]: "직접 만든 프로젝트",
+	[Key.homeLatestPosts]: "최근 글",
+	[Key.tocExpandAll]: "모두 펼치기",
+	[Key.tocCollapseAll]: "모두 접기",
+	[Key.tocToggleSection]: "펼치기 또는 접기: {title}",
+	[Key.tocReadingProgress]: "읽기 진행률",
+	[Key.readingPreviewTitle]: "읽기 환경 미리보기",
+	[Key.readingPreviewNotice]:
+		"로컬 미리보기 전용입니다. 목차와 조판 확인용이며 게시된 글이 아닙니다.",
 	[Key.home]: "홈",
 	[Key.about]: "소개",
 	[Key.archive]: "아카이브",

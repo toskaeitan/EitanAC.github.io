@@ -32,7 +32,7 @@ const tagItems = tags.slice(0, DISPLAY_LIMIT).map((t) => ({
 	href: getTagUrl(t.name),
 }));
 ---
-<WidgetLayout name={i18n(I18nKey.tags)} id="tags" class={className} style={style}>
+{tags.length > 0 && <WidgetLayout name={i18n(I18nKey.tags)} id="tags" class={className} style={style}>
 	<TagList tags={tagItems} />
 	{hasOverflow && (
 		<div slot="footer" class="widget-index-link">
@@ -42,7 +42,7 @@ const tagItems = tags.slice(0, DISPLAY_LIMIT).map((t) => ({
 			</a>
 		</div>
 	)}
-</WidgetLayout>
+</WidgetLayout>}
 
 <style lang="stylus">
 .widget-index-link

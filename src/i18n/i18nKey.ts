@@ -1,4 +1,18 @@
 enum I18nKey {
+	homeIntroTitle = "homeIntroTitle",
+	homeIntroDescription = "homeIntroDescription",
+	homeRead = "homeRead",
+	homeBuild = "homeBuild",
+	homeNotes = "homeNotes",
+	homeFeaturedProject = "homeFeaturedProject",
+	homeLatestPosts = "homeLatestPosts",
+	tocExpandAll = "tocExpandAll",
+	tocCollapseAll = "tocCollapseAll",
+	tocToggleSection = "tocToggleSection",
+	tocReadingProgress = "tocReadingProgress",
+	readingPreviewTitle = "readingPreviewTitle",
+	readingPreviewNotice = "readingPreviewNotice",
+
 	home = "home",
 	notFound = "notFound",
 	notFoundTitle = "notFoundTitle",

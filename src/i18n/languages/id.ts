@@ -2,6 +2,21 @@ import Key from "../i18nKey-runtime.mjs";
 import type { Translation } from "../translation.ts";
 
 export const id: Translation = {
+	[Key.homeIntroTitle]: "Riset, belajar, dan berkarya.",
+	[Key.homeIntroDescription]:
+		"Catatan pertanyaan, metode, dan proses mewujudkan ide.",
+	[Key.homeRead]: "Baca artikel",
+	[Key.homeBuild]: "Lihat proyek",
+	[Key.homeNotes]: "Baca catatan",
+	[Key.homeFeaturedProject]: "Proyek yang saya buat",
+	[Key.homeLatestPosts]: "Tulisan terbaru",
+	[Key.tocExpandAll]: "Buka semua",
+	[Key.tocCollapseAll]: "Tutup semua",
+	[Key.tocToggleSection]: "Buka atau tutup: {title}",
+	[Key.tocReadingProgress]: "Progres membaca",
+	[Key.readingPreviewTitle]: "Pratinjau membaca",
+	[Key.readingPreviewNotice]:
+		"Khusus pratinjau lokal. Halaman ini memperagakan daftar isi dan tata letak, bukan artikel terbit.",
 	[Key.home]: "Beranda",
 	[Key.about]: "Tentang",
 	[Key.archive]: "Arsip",

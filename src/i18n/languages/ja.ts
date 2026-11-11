@@ -2,6 +2,20 @@ import Key from "../i18nKey-runtime.mjs";
 import type { Translation } from "../translation.ts";
 
 export const ja: Translation = {
+	[Key.homeIntroTitle]: "研究、学び、そしてものづくり。",
+	[Key.homeIntroDescription]: "問い、方法、アイデアを形にする過程の記録。",
+	[Key.homeRead]: "記事を読む",
+	[Key.homeBuild]: "プロジェクトを見る",
+	[Key.homeNotes]: "メモを読む",
+	[Key.homeFeaturedProject]: "制作したプロジェクト",
+	[Key.homeLatestPosts]: "最新の記事",
+	[Key.tocExpandAll]: "すべて展開",
+	[Key.tocCollapseAll]: "すべて折りたたむ",
+	[Key.tocToggleSection]: "展開・折りたたみ：{title}",
+	[Key.tocReadingProgress]: "読書の進捗",
+	[Key.readingPreviewTitle]: "読書体験のプレビュー",
+	[Key.readingPreviewNotice]:
+		"ローカルプレビュー専用。目次と組版の確認用で、公開記事ではありません。",
 	[Key.home]: "Home",
 	[Key.about]: "About",
 	[Key.archive]: "Archive",

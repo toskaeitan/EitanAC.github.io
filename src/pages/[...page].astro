@@ -1,4 +1,10 @@
 ---
+import HomeOverview from "@components/organisms/HomeOverview.astro";
+import Key from "@i18n/i18nKey";
+import { i18n } from "@i18n/translation";
+import { momentsConfig } from "@/config/momentsConfig";
+import { projectsConfig } from "@/config/projectsConfig";
+import { resolveProjectsData } from "@/utils/feature-data";
 import Pagination from "@components/molecules/Pagination.astro";
 import PostPage from "@components/organisms/PostPage.astro";
 import type { GetStaticPaths } from "astro";
@@ -15,9 +21,17 @@ export const getStaticPaths = (async ({ paginate }) => {
 const { page } = Astro.props;
 
 const len = page.data.length;
+const project = projectsConfig.enable
+	? resolveProjectsData(projectsConfig).find((item) => item.featured)
+	: undefined;
 ---
 
 <MainGridLayout page="home">
-    <PostPage page={page}></PostPage>
-    <Pagination class="mx-auto onload-animation" page={page} style={`animation-delay: calc(var(--content-delay) + ${(len)*50}ms)`}></Pagination>
+    {page.currentPage === 1 && <HomeOverview project={project} showMoments={momentsConfig.enable} />}
+    {len > 0 && <section aria-label={i18n(Key.homeLatestPosts)}>
+        <h2 class="home-posts-title">{i18n(Key.homeLatestPosts)}</h2>
+        <PostPage page={page} />
+    </section>}
+    {page.lastPage > 1 && <Pagination class="mx-auto onload-animation" page={page} />}
 </MainGridLayout>
+<style>.home-posts-title { margin: var(--m3e-space-8) 0 var(--m3e-space-4); font-size: 1.25rem; font-weight: 600; }</style>

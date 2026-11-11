@@ -14,7 +14,7 @@ import { withUserConfig } from "../utils/config-overlay.ts";
 export const projectsConfig: ProjectsConfig = withUserConfig("projects", {
 	enable: true,
 	title: "$t:projects",
-	description: "我构建并持续维护的工具与项目。",
+	description: "自己做的一些工具。",
 	categories: [
 		{
 			key: "finance",

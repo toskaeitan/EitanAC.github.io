@@ -447,6 +447,9 @@ class FabController {
 			return;
 		}
 		const clone = source.cloneNode(true) as HTMLElement;
+		// The mobile panel keeps its flat outline, independent of desktop folds.
+		clone.classList.remove("m3-blog-toc--tree");
+		clone.replaceChildren(...clone.querySelectorAll("a[data-toc-depth]"));
 		const maxDepth = Number.parseInt(panel.dataset.tocMaxDepth ?? "3", 10);
 		const entries = [
 			...clone.querySelectorAll<HTMLElement>("[data-toc-depth]"),

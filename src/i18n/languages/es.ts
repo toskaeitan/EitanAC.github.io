@@ -2,6 +2,21 @@ import Key from "../i18nKey-runtime.mjs";
 import type { Translation } from "../translation.ts";
 
 export const es: Translation = {
+	[Key.homeIntroTitle]: "Investigación, aprendizaje y creación.",
+	[Key.homeIntroDescription]:
+		"Preguntas, métodos y el proceso de dar forma a las ideas.",
+	[Key.homeRead]: "Leer artículos",
+	[Key.homeBuild]: "Ver proyectos",
+	[Key.homeNotes]: "Leer notas",
+	[Key.homeFeaturedProject]: "Un proyecto propio",
+	[Key.homeLatestPosts]: "Artículos recientes",
+	[Key.tocExpandAll]: "Expandir todo",
+	[Key.tocCollapseAll]: "Contraer todo",
+	[Key.tocToggleSection]: "Expandir o contraer: {title}",
+	[Key.tocReadingProgress]: "Progreso de lectura",
+	[Key.readingPreviewTitle]: "Vista previa de lectura",
+	[Key.readingPreviewNotice]:
+		"Solo vista previa local. Esta página muestra el índice y la tipografía; no es un artículo publicado.",
 	[Key.home]: "Inicio",
 	[Key.about]: "Sobre mí",
 	[Key.archive]: "Archivo",

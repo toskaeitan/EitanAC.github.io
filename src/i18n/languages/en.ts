@@ -2,6 +2,21 @@ import Key from "../i18nKey-runtime.mjs";
 import type { Translation } from "../translation.ts";
 
 export const en: Translation = {
+	[Key.homeIntroTitle]: "Research, learning, and things I build.",
+	[Key.homeIntroDescription]:
+		"A place for questions, methods, and work in progress.",
+	[Key.homeRead]: "Explore the archive",
+	[Key.homeBuild]: "Browse projects",
+	[Key.homeNotes]: "Read moments",
+	[Key.homeFeaturedProject]: "A project I built",
+	[Key.homeLatestPosts]: "Latest writing",
+	[Key.tocExpandAll]: "Expand all",
+	[Key.tocCollapseAll]: "Collapse all",
+	[Key.tocToggleSection]: "Expand or collapse: {title}",
+	[Key.tocReadingProgress]: "Reading progress",
+	[Key.readingPreviewTitle]: "Reading experience preview",
+	[Key.readingPreviewNotice]:
+		"Local preview only. This page demonstrates the table of contents and is not a published article.",
 	[Key.home]: "Home",
 	[Key.about]: "About",
 	[Key.archive]: "Archive",

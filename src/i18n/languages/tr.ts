@@ -2,6 +2,21 @@ import Key from "../i18nKey-runtime.mjs";
 import type { Translation } from "../translation.ts";
 
 export const tr: Translation = {
+	[Key.homeIntroTitle]: "Araştırma, öğrenme ve üretme.",
+	[Key.homeIntroDescription]:
+		"Sorular, yöntemler ve fikirleri hayata geçirme süreci.",
+	[Key.homeRead]: "Yazıları oku",
+	[Key.homeBuild]: "Projeleri gör",
+	[Key.homeNotes]: "Notları oku",
+	[Key.homeFeaturedProject]: "Geliştirdiğim bir proje",
+	[Key.homeLatestPosts]: "Son yazılar",
+	[Key.tocExpandAll]: "Tümünü genişlet",
+	[Key.tocCollapseAll]: "Tümünü daralt",
+	[Key.tocToggleSection]: "Genişlet veya daralt: {title}",
+	[Key.tocReadingProgress]: "Okuma ilerlemesi",
+	[Key.readingPreviewTitle]: "Okuma önizlemesi",
+	[Key.readingPreviewNotice]:
+		"Yalnızca yerel önizleme. Bu sayfa içindekileri ve düzeni gösterir; yayımlanmış bir yazı değildir.",
 	[Key.home]: "Anasayfa",
 	[Key.about]: "Hakkında",
 	[Key.archive]: "Arşiv",

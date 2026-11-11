@@ -13,7 +13,7 @@ export const siteConfig: SiteConfig = withUserConfig("site", {
 	site: "https://eitan.chronoresearch.org/",
 	base: "/",
 	title: "Eitan",
-	subtitle: "研究、学习与工程实践",
+	subtitle: "学习笔记与小项目",
 	// 电脑端顶栏标题与导航内容区域："left" 左对齐，"center" 居中。
 	topAppBar: {
 		contentAlign: "center",
@@ -70,8 +70,8 @@ export const siteConfig: SiteConfig = withUserConfig("site", {
 		homeText: {
 			// 仅在首页 Banner 中显示，标题与副标题会上下居中排列。
 			enable: true,
-			title: "Look first, then leap.",
-			subtitle: ["研究、学习与工程实践"],
+			title: "Eitan",
+			subtitle: ["学习笔记与小项目"],
 			typewriter: {
 				// 副标题逐字显示；关闭后直接显示完整副标题。
 				enable: true,

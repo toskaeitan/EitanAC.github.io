@@ -109,3 +109,22 @@
 	color: var(--on-secondary-container);
 	font-weight: 600;
 }
+
+/* Desktop outline: independent disclosure controls keep heading links usable. */
+.m3-blog-toc__row { display: flex; align-items: center; min-width: 0; }
+.m3-blog-toc__row[hidden] { display: none; }
+.m3-blog-toc__row > a { flex: 1; min-width: 0; }
+.m3-blog-toc--tree .m3-blog-toc__row { position: relative; margin-left: calc(var(--toc-level) * .75rem); }
+.m3-blog-toc--tree .m3-blog-toc__item { padding-left: .25rem; border-radius: var(--shape-corner-s); }
+.m3-blog-toc--tree .m3-blog-toc__item--sub::before { content: ''; position: absolute; left: -.25rem; top: 0; bottom: 0; width: 1px; background: var(--outline-variant); }
+.m3-blog-toc__toggle { display: inline-flex; justify-content: center; align-items: center; flex-shrink: 0; width: 2.75rem; min-height: 2.75rem; color: var(--on-surface-variant); background: transparent; border: 0; border-radius: var(--shape-corner-s); cursor: pointer; }
+.m3-blog-toc__toggle[aria-expanded='false'] svg { transform: rotate(-90deg); }
+.m3-blog-toc__toggle:focus-visible, .toc-toolbar button:focus-visible { outline: 2px solid var(--primary); outline-offset: -2px; }
+.toc-toolbar { display: flex; justify-content: space-between; gap: var(--m3e-space-2); border-bottom: 1px solid var(--outline-variant); padding-bottom: var(--m3e-space-2); margin-bottom: var(--m3e-space-2); }
+.toc-toolbar button { min-height: 2.75rem; padding: .25rem .5rem; color: var(--primary); font: inherit; font-size: .75rem; background: transparent; border: 0; border-radius: var(--shape-corner-s); cursor: pointer; }
+.toc-toolbar button:hover, .m3-blog-toc__toggle:hover { background: var(--surface-container-highest); }
+.toc-reading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--m3e-space-2); color: var(--on-surface-variant); font-size: .75rem; margin-top: var(--m3e-space-4); padding-top: var(--m3e-space-3); border-top: 1px solid var(--outline-variant); }
+.toc-reading progress { appearance: none; width: 100%; height: .2rem; border: 0; background: var(--outline-variant); color: var(--primary); }
+.toc-reading progress::-webkit-progress-bar { background: var(--outline-variant); }
+.toc-reading progress::-webkit-progress-value { background: var(--primary); }
+.toc-reading progress::-moz-progress-bar { background: var(--primary); }

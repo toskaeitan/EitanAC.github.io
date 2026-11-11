@@ -2,6 +2,20 @@ import Key from "../i18nKey-runtime.mjs";
 import type { Translation } from "../translation.ts";
 
 export const th: Translation = {
+	[Key.homeIntroTitle]: "ค้นคว้า เรียนรู้ และลงมือสร้าง",
+	[Key.homeIntroDescription]: "บันทึกคำถาม วิธีการ และกระบวนการทำความคิดให้เป็นจริง",
+	[Key.homeRead]: "อ่านบทความ",
+	[Key.homeBuild]: "ดูโครงการ",
+	[Key.homeNotes]: "อ่านบันทึก",
+	[Key.homeFeaturedProject]: "โครงการที่สร้าง",
+	[Key.homeLatestPosts]: "บทความล่าสุด",
+	[Key.tocExpandAll]: "ขยายทั้งหมด",
+	[Key.tocCollapseAll]: "ย่อทั้งหมด",
+	[Key.tocToggleSection]: "ขยายหรือย่อ: {title}",
+	[Key.tocReadingProgress]: "ความคืบหน้าการอ่าน",
+	[Key.readingPreviewTitle]: "ตัวอย่างการอ่าน",
+	[Key.readingPreviewNotice]:
+		"สำหรับดูตัวอย่างในเครื่องเท่านั้น หน้านี้แสดงสารบัญและการจัดหน้า ไม่ใช่บทความที่เผยแพร่",
 	[Key.home]: "หน้าแรก",
 	[Key.about]: "เกี่ยวกับ",
 	[Key.archive]: "คลัง",

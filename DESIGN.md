@@ -600,3 +600,14 @@ Card corners are 12px, controls 8px, boundaries quiet, and ambient light reduced
 These are local Eitan overrides, not a recreation of the reference site.
 
 The public site is fixed to the dark teal brand theme. The top-bar light/dark/system switch is removed; startup ignores earlier saved mode choices so returning visitors see the same palette.
+
+### Home and outline refinement · local preview
+
+Preserve Eitan's fixed dark teal palette, Source Han Serif typography and contour
+texture. Home uses a quiet introduction, direct reading links and the existing
+featured project, without invented articles or counters. Article pagination and
+empty taxonomy widgets appear only when real content exists. The desktop outline
+has independent section disclosures, expand/collapse controls, automatic reveal
+of the current section and reading progress. Mobile retains its existing panel.
+`EITAN_LOCAL_PREVIEW=1` opts into `/preview/reading/` for local interaction review;
+normal production builds generate no fixture route or demonstration posts.

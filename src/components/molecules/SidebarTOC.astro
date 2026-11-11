@@ -40,7 +40,12 @@ const tocHeadings = headings.map((heading) => ({
 >
 	<div id="toc" class="sidebar-toc__content">
 		<table-of-contents>
-			<TocList headings={tocHeadings} maxDepth={maxLevel} />
+			<div class="toc-toolbar">
+                <button type="button" data-toc-action="expand">{i18n(I18nKey.tocExpandAll)}</button>
+                <button type="button" data-toc-action="collapse">{i18n(I18nKey.tocCollapseAll)}</button>
+            </div>
+            <TocList headings={tocHeadings} maxDepth={maxLevel} collapsible />
+            <div class="toc-reading"><span>{i18n(I18nKey.tocReadingProgress)}</span><output data-toc-percent>0%</output><progress data-toc-progress max="100" value="0" aria-label={i18n(I18nKey.tocReadingProgress)} /></div>
 		</table-of-contents>
 	</div>
 </WidgetLayout>
@@ -75,6 +80,7 @@ const tocHeadings = headings.map((heading) => ({
 </style>
 
 <script>
+import { visibleTocRows } from '@utils/toc-tree';
 class TableOfContents extends HTMLElement {
 	tocEl: HTMLElement | null = null;
 	visibleClass = "visible";
@@ -89,6 +95,50 @@ class TableOfContents extends HTMLElement {
 	anchorNavIdx: number | null = null;
 	anchorNavScrollTop = 0;
 	updateScheduled = false;
+    rows: HTMLElement[] = [];
+    collapsed = new Set<number>();
+    initTimer?: ReturnType<typeof setTimeout>;
+    initElement: Element | null = null;
+    runInit = () => { if (this.isConnected && !this.tocEl) this.init(); };
+
+    syncBranches = () => {
+        const visible = visibleTocRows(this.rows.map(row => ({ parent: Number(row.dataset.tocParent) })), this.collapsed);
+        this.rows.forEach((row, index) => { row.hidden = !visible[index]; });
+        this.querySelectorAll<HTMLButtonElement>('[data-toc-toggle]').forEach(button => {
+            button.setAttribute('aria-expanded', String(!this.collapsed.has(Number(button.dataset.tocToggle))));
+        });
+    };
+
+    revealAncestors = (index: number) => {
+        let parent = Number(this.rows[index]?.dataset.tocParent ?? -1);
+        while (parent >= 0) { this.collapsed.delete(parent); parent = Number(this.rows[parent]?.dataset.tocParent ?? -1); }
+        this.syncBranches();
+    };
+
+    handleBranchClick = (event: Event) => {
+        const button = (event.target as Element).closest<HTMLButtonElement>('button');
+        if (!button) return;
+        if (button.dataset.tocToggle !== undefined) {
+            const index = Number(button.dataset.tocToggle);
+            this.collapsed.has(index) ? this.collapsed.delete(index) : this.collapsed.add(index);
+        } else if (button.dataset.tocAction) {
+            this.collapsed.clear();
+            if (button.dataset.tocAction === 'collapse') this.querySelectorAll<HTMLButtonElement>('[data-toc-toggle]').forEach(b => this.collapsed.add(Number(b.dataset.tocToggle)));
+        } else return;
+        this.syncBranches();
+    };
+
+    updateProgress = () => {
+        const prose = document.querySelector<HTMLElement>('.prose');
+        if (!prose) return;
+        const top = prose.getBoundingClientRect().top + window.scrollY;
+        const distance = Math.max(1, prose.offsetHeight - window.innerHeight + 80);
+        const percent = Math.round(Math.max(0, Math.min(100, (window.scrollY - top + 80) / distance * 100)));
+        const progress = this.querySelector<HTMLProgressElement>('[data-toc-progress]');
+        const output = this.querySelector('[data-toc-percent]');
+        if (progress) progress.value = percent;
+        if (output) output.textContent = `${percent}%`;
+    };
 
 	constructor() {
 		super();
@@ -149,23 +199,24 @@ class TableOfContents extends HTMLElement {
 
 		if (best === this.lastActiveIdx) {
 			if (this.anchorNavIdx !== null) {
-				this.tocEntries.forEach((entry) =>
-					entry.classList.toggle(
-						"m3-blog-toc__item--active",
-						this.tocEntries.indexOf(entry) === best,
-					),
-				);
+                this.applyActiveEntry(best);
 				this.scrollToActiveHeading(this.tocEntries[best], true);
 			}
 			return;
 		}
 		this.lastActiveIdx = best;
-		this.tocEntries.forEach((entry) =>
-			entry.classList.remove("m3-blog-toc__item--active"),
-		);
-		this.tocEntries[best]?.classList.add("m3-blog-toc__item--active");
+        this.revealAncestors(best);
+        this.applyActiveEntry(best);
 		this.scrollToActiveHeading(this.tocEntries[best], this.anchorNavIdx !== null);
 	};
+
+    applyActiveEntry = (best: number) => {
+        this.tocEntries.forEach((entry, index) => {
+            entry.classList.toggle("m3-blog-toc__item--active", index === best);
+            if (index === best) entry.setAttribute("aria-current", "location");
+            else entry.removeAttribute("aria-current");
+        });
+    };
 
 	scrollToActiveHeading = (activeHeading?: HTMLAnchorElement, force = false) => {
 		if ((!force && this.anchorNavTarget) || !this.tocEl || !activeHeading)
@@ -204,7 +255,8 @@ class TableOfContents extends HTMLElement {
 		this.updateScheduled = true;
 		requestAnimationFrame(() => {
 			this.updateScheduled = false;
-			this.toggleActiveHeading();
+			this.updateProgress();
+            this.toggleActiveHeading();
 			this.updateActiveHighlight();
 		});
 	};
@@ -274,21 +326,12 @@ class TableOfContents extends HTMLElement {
 	}
 
 	connectedCallback() {
-		const element = document.querySelector(".prose");
-		let initialized = false;
-		const runInit = () => {
-			if (initialized) return;
-			initialized = true;
-			this.init();
-		};
-
-		if (element && getComputedStyle(element).animationName !== "none") {
-			element.addEventListener("animationend", runInit, { once: true });
-			setTimeout(runInit, 300);
-		} else {
-			runInit();
-		}
-	}
+        this.initElement = document.querySelector('.prose');
+        if (this.initElement && getComputedStyle(this.initElement).animationName !== 'none') {
+            this.initElement.addEventListener('animationend', this.runInit, { once: true });
+            this.initTimer = setTimeout(this.runInit, 300);
+        } else this.runInit();
+    }
 
 	init() {
 		this.tocEl =
@@ -296,6 +339,8 @@ class TableOfContents extends HTMLElement {
 			document.getElementById("toc-inner-wrapper");
 
 		if (!this.tocEl) return;
+        this.rows = Array.from(this.querySelectorAll<HTMLElement>('.m3-blog-toc__row'));
+        this.addEventListener('click', this.handleBranchClick);
 
 		this.tocEl.addEventListener("click", this.handleAnchorClick, {
 			capture: true,
@@ -345,12 +390,15 @@ class TableOfContents extends HTMLElement {
 	}
 
 	disconnectedCallback() {
+        clearTimeout(this.initTimer);
+        this.initElement?.removeEventListener('animationend', this.runInit);
+        this.removeEventListener('click', this.handleBranchClick);
 		this.sections.forEach((section) => {
 			if (section) this.observer.unobserve(section);
 		});
 		this.observer.disconnect();
 		window.removeEventListener("scroll", this.update);
-		this.tocEl?.removeEventListener("click", this.handleAnchorClick);
+		this.tocEl?.removeEventListener("click", this.handleAnchorClick, { capture: true });
 		window.removeEventListener("wheel", this.releaseAnchorNavigation);
 		window.removeEventListener("touchstart", this.releaseAnchorNavigation);
 		window.removeEventListener("pointerdown", this.releaseAnchorNavigation);

@@ -34,7 +34,7 @@ const categoryItems = categories.slice(0, DISPLAY_LIMIT).map((c) => ({
 }));
 ---
 
-<WidgetLayout name={i18n(I18nKey.categories)} id="categories" class={className} style={style}>
+{categories.length > 0 && <WidgetLayout name={i18n(I18nKey.categories)} id="categories" class={className} style={style}>
 	<CategoryList categories={categoryItems} />
 	{hasOverflow && (
 		<div slot="footer" class="widget-index-link">
@@ -44,7 +44,7 @@ const categoryItems = categories.slice(0, DISPLAY_LIMIT).map((c) => ({
 			</a>
 		</div>
 	)}
-</WidgetLayout>
+</WidgetLayout>}
 
 <style lang="stylus">
 .widget-index-link

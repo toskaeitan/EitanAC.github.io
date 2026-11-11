@@ -1,0 +1,26 @@
+---
+// Explicit build-time opt-in: this fixture never creates a production route.
+import Markdown from "@components/content/Markdown.astro";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import { Content, getHeadings } from "@/data/preview/reading.md";
+import Key from "@i18n/i18nKey";
+import { i18n } from "@i18n/translation";
+export function getStaticPaths() {
+	return process.env.EITAN_LOCAL_PREVIEW === "1"
+		? [{ params: { demo: "reading" } }]
+		: [];
+}
+---
+<MainGridLayout page="post" title={i18n(Key.readingPreviewTitle)} headings={getHeadings()}>
+ <meta slot="head" name="robots" content="noindex,nofollow" />
+ <article class="reading-preview" data-pagefind-ignore>
+  <h1>{i18n(Key.readingPreviewTitle)}</h1>
+  <p class="preview-notice">{i18n(Key.readingPreviewNotice)}</p>
+  <Markdown class=""><Content /></Markdown>
+ </article>
+</MainGridLayout>
+<style>
+.reading-preview { padding: clamp(1.25rem, 4vw, 2.5rem); background: var(--surface-container); border-radius: var(--shape-corner-m); }
+h1 { margin: 0 0 var(--m3e-space-4); font-size: 2rem; font-weight: 600; }
+.preview-notice { color: var(--on-surface-variant); font-size: .875rem; line-height: 1.8; padding-bottom: var(--m3e-space-6); margin-bottom: var(--m3e-space-8); border-bottom: 1px solid var(--outline-variant); }
+</style>
